@@ -1,0 +1,91 @@
+@baseUrl = https://alfinnurmuflihin-production.up.railway.app
+@studentToken = <pasteStudentToken>
+@staffToken = <pasteStaffToken>
+
+### Register Mahasiswa
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "mahasiswa1",
+  "password": "password123",
+  "role": "student",
+  "nim": "1234567890"
+}
+
+###
+
+### Register Staff
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "staff1",
+  "password": "password123",
+  "role": "staff"
+}
+
+###
+
+### Login Mahasiswa
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "mahasiswa1",
+  "password": "password123"
+}
+
+
+###
+
+### Login Staff
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "staff1",
+  "password": "password123"
+}
+
+
+###
+
+### Buat Pengaduan (Mahasiswa)
+POST {{baseUrl}}/complaints
+Content-Type: application/json
+Authorization: Bearer {{studentToken}}
+
+{
+  "title": "Keluhan Kelas",
+  "description": "Kelas terlalu penuh dan panas.",
+  "studentNIM": "1234567890",
+  "phoneNumber": "081234567890"
+}
+
+###
+
+### Lihat Semua Pengaduan (Mahasiswa)
+GET {{baseUrl}}/complaints
+Authorization: Bearer {{studentToken}}
+
+###
+
+### Lihat Detail Pengaduan (Mahasiswa)
+GET {{baseUrl}}/complaints/1
+Authorization: Bearer {{studentToken}}
+
+###
+
+
+###
+
+### Menambahkan Respons dan Memperbarui Status pada Pengaduan
+PUT {{baseUrl}}/complaints/respond/1
+Authorization: Bearer {{staffToken}}
+Content-Type: application/json
+
+{
+  "response": "kalungan es kalau mau dingin bjirrr.",
+  "status": "resolved"
+}
